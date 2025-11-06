@@ -1,24 +1,24 @@
 const mysql = require('mysql2/promise');
-let text = 'Jack'
-let age = 33
 
 async function main() {
   try {
     // Connect to the database using promises
     const connection = await mysql.createConnection({
       host: 'localhost',
-      user: 'username',
-      password: 'password',
-      database: 'first_db'
+      user: 'app_user',
+      password: '',
+      database: 'pastebin'
     });
     
     console.log('Connected to MySQL Database!');
     
-    await connection.execute(`INSERT INTO user (name, age) VALUES ('${text}', ${age})`)
+    await connection.execute(
+      'CREATE TABLE IF NOT EXISTS pastebin_data (ID INT AUTO_INCREMENT PRIMARY KEY, StartDate DATETIME DEFAULT CURRENT_TIMESTAMP, Title VARCHAR(90) DEFAULT "Untitled", Text MEDIUMTEXT, EndDate DATETIME, URL VARCHAR(50));'
+    )
+    await connection.execute(
+      'INSERT INTO pastebin_data (Title, Text, EndDate, URL) VALUES ("Title 1", "first attempt", DATE_ADD(NOW(), INTERVAL 1 MONTH), "zzz@fff.com");'
+    )
 
-    // Execute a query using promise
-    const [rows, fields] = await connection.execute('SELECT * FROM user');
-    console.log('Query Result:', rows);
     
     // Close the connection
     await connection.end();
