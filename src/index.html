@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pastebin</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <script type="module" src="scripts/script.js"></script>
+</head>
+<body>
+    <div class="maincontainer">
+        <form id="main-form">
+        <h3>New Paste</h3>
+        <textarea id="postform-text" aria-label="New Paste" aria-required="true"></textarea>
+        <div class="block__name">
+        <label for="fileName">Название - </label>
+        <input type="text" id="fileName">
+        </div>
+        <button type="submit" id="btn">Сохранить</button>
+        </form>
+    </div>
+</body>
+</html>
