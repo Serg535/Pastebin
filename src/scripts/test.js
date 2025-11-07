@@ -19,7 +19,6 @@ async function main() {
       'INSERT INTO pastebin_data (Title, Text, EndDate, URL) VALUES ("Title 1", "first attempt", DATE_ADD(NOW(), INTERVAL 1 MONTH), "zzz@fff.com");'
     )
 
-    
     // Close the connection
     await connection.end();
   } catch (err) {
