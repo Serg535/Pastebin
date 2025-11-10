@@ -10,7 +10,7 @@ async function readInput(event) {
   }
 
   try {
-    const response = await fetch('http://localhost:3000/create-text', {
+    const response = await fetch('/api/create-text', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({

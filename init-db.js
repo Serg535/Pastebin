@@ -14,7 +14,6 @@ connection.connect((error) => {
 
   console.log('Подключаемся к MySQL...');
 
-  // Создаем базу данных
   connection.query('CREATE DATABASE IF NOT EXISTS pastebin_db', (error) => {
     if (error) {
       console.log('Ошибка создания базы:', error);
@@ -22,14 +21,12 @@ connection.connect((error) => {
     }
     console.log('База данных создана');
 
-    // Используем нашу базу
     connection.query('USE pastebin_db', (error) => {
       if (error) {
         console.log('Ошибка выбора базы:', error);
         return;
       }
 
-      // Создаем таблицу с 6 полями
       const createTableSQL = `
         CREATE TABLE IF NOT EXISTS pastebin_data (
           id INT AUTO_INCREMENT PRIMARY KEY,
@@ -37,7 +34,7 @@ connection.connect((error) => {
           title VARCHAR(255) NOT NULL,
           text TEXT NOT NULL,
           EndDate DATETIME,
-          url VARCHAR(10) UNIQUE
+          url VARCHAR(10)
         )
       `;
 
