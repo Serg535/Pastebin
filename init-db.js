@@ -1,10 +1,13 @@
 import mysql from 'mysql2';
+import 'dotenv/config';
 
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'vboxuser'
-});
+const dbConfig = {
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+}
+
+const connection = mysql.createConnection(dbConfig);
 
 connection.connect((error) => {
   if (error) {
@@ -12,7 +15,7 @@ connection.connect((error) => {
     return;
   }
 
-  console.log('Подключаемся к MySQL...');
+  console.log('Подключаемся к MySQL');
 
   connection.query('CREATE DATABASE IF NOT EXISTS pastebin_db', (error) => {
     if (error) {

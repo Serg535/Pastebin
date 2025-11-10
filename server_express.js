@@ -38,6 +38,30 @@ app.post('/api/create-text', async (req, res) => {
     }
 })
 
+app.get('/api/paste/:url', async (req, res) => {
+    try {
+        const {url} = req.params
+        const sql_getText = `
+        SELECT * FROM pastebin_data WHERE url = ?;
+        `
+        const [results] = await connection.promise().query(sql_getText, [url])
+
+        if (results.length === 0) {
+            return res.status(404).json({
+                error: 'текст не найден'
+            })
+        }
+
+        res.json({text: results[0]})
+    }
+    catch (error) {
+        console.error('Ошибка при получении url', error)
+        res.status(500).json({
+            error: 'Ошибка бд'
+        })
+    }
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
