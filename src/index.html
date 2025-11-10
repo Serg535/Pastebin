@@ -4,8 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pastebin</title>
-    <link rel="stylesheet" href="styles/style.css">
-    
+    <!-- <link rel="stylesheet" href="styles/style.css"> -->
+    <style>
+        * {
+    padding: 0;
+    margin: 0;
+}
+.maincontainer {
+    padding: 20px;
+}
+#main-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+#btn {
+    width: 80px;
+    padding: 5px;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(25, 108, 175);
+}
+#postform-text {
+    overflow-wrap: break-word;
+    height: 300px;
+}
+    </style>
 </head>
 <body>
     <div class="maincontainer">
@@ -16,11 +41,10 @@
         <label for="fileName">Название - </label>
         <input type="text" id="fileName">
         </div>
-        
+        <button type="submit" id="btn">Сохранить</button>
         </form>
-        <button id="btn">Сохранить</button>
     </div>
 
-    <script src="scripts/script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

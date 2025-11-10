@@ -2,9 +2,9 @@ import mysql from 'mysql2';
 
   const connection = mysql.createConnection({
       host: 'localhost',
-      user: 'app_user',
-      password: '',
-      database: 'pastebin'
+      user: 'root',
+      password: 'vboxuser',
+      database: 'pastebin_db'
     });
  
 connection.connect((error) => {
@@ -16,4 +16,4 @@ connection.connect((error) => {
   }
 })
 
-export default connection
+export default connection;
