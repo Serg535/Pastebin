@@ -24,7 +24,7 @@ app.post('/api/create-text', async (req, res) => {
         INSERT INTO pastebin_data (title, text, EndDate, url) VALUES (?, ?, DATE_ADD(NOW(), INTERVAL 1 MONTH), ?);
         `
         const [result] = await connection.promise().query(sql_order, [title, text, randomURL])
-        console.log('Паста сохранена')
+        console.log('Текст сохранен')
         res.json({
             success: true,
             id: result.insertId,
@@ -38,27 +38,22 @@ app.post('/api/create-text', async (req, res) => {
     }
 })
 
-app.get('/api/paste/:url', async (req, res) => {
+app.get('/show/:url', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'show.html'))
+})
+
+app.get('/api/pastes', async (req, res) => {
     try {
-        const {url} = req.params
-        const sql_getText = `
-        SELECT * FROM pastebin_data WHERE url = ?;
+        const sql_get_all = `
+        SELECT * FROM pastebin_data ORDER BY id DESC;
         `
-        const [results] = await connection.promise().query(sql_getText, [url])
+        const [results] = await connection.promise().query(sql_get_all)
 
-        if (results.length === 0) {
-            return res.status(404).json({
-                error: 'текст не найден'
-            })
-        }
-
-        res.json({text: results[0]})
+        res.json({pastes: results})
     }
     catch (error) {
-        console.error('Ошибка при получении url', error)
-        res.status(500).json({
-            error: 'Ошибка бд'
-        })
+        console.error('Ошибка при получении всех текстов', error)
+        res.status(500).json({error: 'DB get all error'})
     }
 })
 

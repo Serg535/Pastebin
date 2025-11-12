@@ -10,7 +10,7 @@
     flex-direction: column;
     gap: 20px;
 }
-#btn {
+.button {
     width: 80px;
     padding: 5px;
     color: white;
@@ -21,4 +21,18 @@
 #postform-text {
     overflow-wrap: break-word;
     height: 300px;
+}
+#block {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.inner_paste {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.btns_wrapper {
+    display: flex;
+    gap: 20px;
 }
