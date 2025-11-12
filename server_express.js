@@ -57,6 +57,26 @@ app.get('/api/pastes', async (req, res) => {
     }
 })
 
+app.get('/api/paste/csm4sm', async (req, res) => {
+    try {
+    const {url} = req.params
+    const sql_get_url = `
+    SELECT * FROM pastebin_data WHERE url = ?;
+    `
+    const [results] = await connection.promise().query(sql_get_url, [url])
+
+    if (results.length === 0) {
+        return res.status(404).json({error: 'Адрес не найден'})
+    }
+
+    res.json({paste: results})
+    }
+    catch (error) {
+        console.error('Ошибка в бд', error)
+        res.status(404).json({error: 'Текст не был найден в бд'})
+    }
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
