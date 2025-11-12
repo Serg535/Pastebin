@@ -1,6 +1,6 @@
-// document.addEventListener('DOMContentLoaded',function() {
-//     loadPaste()
-// })
+document.addEventListener('DOMContentLoaded',function() {
+    loadPaste()
+})
 
 async function loadPaste() {
     const path_parts = window.location.pathname.split('/')
@@ -8,6 +8,7 @@ async function loadPaste() {
 
     try {
         const response = await fetch(`/api/paste/${pasteurl}`)
+        console.log(pasteurl)
         const data = await response.json()
 
         if (data.paste) {
@@ -29,5 +30,3 @@ function displayPaste(paste) {
         </div>
     `
 }
-
-document.querySelector('button').addEventListener('click', loadPaste)

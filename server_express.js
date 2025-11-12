@@ -57,7 +57,7 @@ app.get('/api/pastes', async (req, res) => {
     }
 })
 
-app.get('/api/paste/csm4sm', async (req, res) => {
+app.get('/api/paste/:url', async (req, res) => {
     try {
     const {url} = req.params
     const sql_get_url = `
@@ -69,7 +69,7 @@ app.get('/api/paste/csm4sm', async (req, res) => {
         return res.status(404).json({error: 'Адрес не найден'})
     }
 
-    res.json({paste: results})
+    res.json({paste: results[0]})
     }
     catch (error) {
         console.error('Ошибка в бд', error)

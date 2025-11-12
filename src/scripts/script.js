@@ -69,6 +69,5 @@ function displayPastes(pastes) {
     `).join('')
 }
 
-document.getElementById('url_show').addEventListener('click', loadPaste)
 document.getElementById('btn_get').addEventListener('click', get_all)
 document.getElementById('btn').addEventListener('click', readInput)
