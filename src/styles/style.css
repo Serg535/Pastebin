@@ -1,38 +1,73 @@
+@import url(fonts.css);
+
 * {
     padding: 0;
     margin: 0;
 }
-.maincontainer {
-    padding: 20px;
+body {
+    background-color: rgb(238, 238, 238);
+    font-family: 'Montserrat';
 }
 #main-form {
     display: flex;
     flex-direction: column;
     gap: 20px;
-}
-.button {
-    width: 80px;
-    padding: 5px;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    background-color: rgb(25, 108, 175);
+    margin: 10px 0;
 }
 #postform-text {
     overflow-wrap: break-word;
     height: 300px;
 }
-#block {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
+.block_form {
+    max-width: 1340px;
+    height: 100vh;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
 }
-.inner_paste {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+a {
+    text-decoration: none;
+    color: inherit;
 }
-.btns_wrapper {
+button {
+    font: inherit;
+}
+.save_btn {
+    width: 60px;
+    color: #fff;
+}
+header {
+    background-color: rgb(16, 57, 133);
+    padding: 10px 30px;
+    height: 50px;
     display: flex;
-    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.logo {
+    font-size: 20px;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    width: 100%;
+    max-width: 1400px;
+}
+.header_sign {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+.btn {
+    border: 1px solid white;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgb(16, 57, 133);
+    transition: background-color .3s ease-in-out;
+}
+.btn:hover {
+    background-color: #fff;
+    color: rgb(16, 57, 133);
 }

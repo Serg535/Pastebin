@@ -5,6 +5,7 @@ async function readInput(event) {
 
   const title = document.querySelector('#fileName').value
   const text = document.querySelector('#postform-text').value
+  const randomURL = Math.random().toString(36).substring(2, 8)
   
   if (!title || !text) {
     alert('Заполните все поля', 'error')
@@ -17,14 +18,17 @@ async function readInput(event) {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         title: title,
-        text: text
+        text: text,
+        randomURL: randomURL
       })
     })
 
     const data = await response.json()
 
     if (data.success) {
+      document.getElementById('main-form').reset()
       console.log('data success')
+      alert(`Ваша ссылка - http://localhost:3000/show/${randomURL}`)
     }
     else {
       console.log('data error', data.error)
@@ -36,38 +40,4 @@ async function readInput(event) {
   }
 }
 
-async function get_all() {
-
-  try {
-  const response = await fetch('/api/pastes')
-
-  const data = await response.json()
-
-  if (data.pastes) {
-    displayPastes(data.pastes)
-    console.log(data.pastes)
-  }
-  }
-  catch (error) {
-    console.error('ошибка получения текстов', error)
-  }
-  
-}
-
-function displayPastes(pastes) {
-  if (pastes.length === 0) {
-    block.innerHTML = `Нет данных`
-    return
-  }
-  block.innerHTML = pastes.map(paste => `
-    <div class="inner_paste">
-    <h3>${paste.title}</h3>
-    <p>${new Date(paste.StartDate).toLocaleString('ru-RU')} - ${new Date(paste.EndDate).toLocaleString('ru-RU')}</p>
-    <a href="/show/${paste.url}">${paste.url}</a>
-    <p>${paste.text}</p>
-    </div>
-    `).join('')
-}
-
-document.getElementById('btn_get').addEventListener('click', get_all)
 document.getElementById('btn').addEventListener('click', readInput)

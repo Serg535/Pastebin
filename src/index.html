@@ -8,21 +8,25 @@
 </head>
 <body>
     <div class="maincontainer">
-        <form id="main-form">
+        <header>
+            <div class="header">
+                <a href="###" class="logo">Pastebin</a>
+                <div class="header_sign">
+                    <a href="/" class="header_sign_btn btn">Log in</a>
+                    <a href="/" class="header_sign_btn btn">Sign Up</a>
+                </div>
+            </div>
+        </header>
+        <div class="block_form">
         <h3>New Paste</h3>
-        <textarea id="postform-text" aria-label="New Paste" aria-required="true"></textarea>
-        <div class="block__name">
-        <label for="fileName">Название - </label>
+        <form id="main-form">
+            <div class="block__name">
+        <label for="fileName">Title - </label>
         <input type="text" id="fileName">
         </div>
-        <div class="btns_wrapper">
-            <button type="submit" id="btn" class="button">Сохранить</button>
-        <button id="btn_get" class="button" type="button">Показать все</button>
-        </div>
+        <textarea id="postform-text" aria-label="New Paste" aria-required="true"></textarea>
+        <button type="submit" id="btn" class="save_btn btn">Save</button>
         </form>
-
-        <div id="block">
-
         </div>
     </div>
 

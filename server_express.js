@@ -18,8 +18,7 @@ app.get('/', (req, res) => {
 
 app.post('/api/create-text', async (req, res) => {
     try {
-        const {title, text} = req.body;
-        const randomURL = Math.random().toString(36).substring(2, 8)
+        const {title, text, randomURL} = req.body;
         const sql_order = `
         INSERT INTO pastebin_data (title, text, EndDate, url) VALUES (?, ?, DATE_ADD(NOW(), INTERVAL 1 MONTH), ?);
         `
@@ -40,21 +39,6 @@ app.post('/api/create-text', async (req, res) => {
 
 app.get('/show/:url', (req, res) => {
     res.sendFile(path.join(__dirname, 'src', 'show.html'))
-})
-
-app.get('/api/pastes', async (req, res) => {
-    try {
-        const sql_get_all = `
-        SELECT * FROM pastebin_data ORDER BY id DESC;
-        `
-        const [results] = await connection.promise().query(sql_get_all)
-
-        res.json({pastes: results})
-    }
-    catch (error) {
-        console.error('Ошибка при получении всех текстов', error)
-        res.status(500).json({error: 'DB get all error'})
-    }
 })
 
 app.get('/api/paste/:url', async (req, res) => {
