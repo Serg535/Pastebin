@@ -1,5 +1,5 @@
 @import url(fonts.css);
-
+/* @import "tailwindcss"; */
 * {
     padding: 0;
     margin: 0;
@@ -29,12 +29,11 @@ a {
     text-decoration: none;
     color: inherit;
 }
-button {
+button, input, textarea {
     font: inherit;
 }
-.save_btn {
-    width: 60px;
-    color: #fff;
+input, textarea {
+    border: 1px solid black;
 }
 header {
     background-color: rgb(16, 57, 133);
@@ -70,4 +69,9 @@ header {
 .btn:hover {
     background-color: #fff;
     color: rgb(16, 57, 133);
+}
+.save_btn {
+    width: 60px;
+    color: #fff;
+    border: 1px solid rgb(16, 57, 133);
 }

@@ -1,8 +1,20 @@
 {
   "type": "module",
+  "scripts": {
+    "init-db": "node init-db.js",
+    "database.js": "node database.js",
+    "start_server": "node server_express.js",
+    "start_with_db": "npm run init-db && npm run start_server"
+  },
   "dependencies": {
+    "@tailwindcss/postcss": "^4.1.17",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "mysql2": "^3.15.3"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.22",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.17"
   }
 }
