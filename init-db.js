@@ -7,7 +7,7 @@ const dbConfig = {
     password: process.env.DB_PASSWORD,
 }
 
-setTimeout(function(){
+// setTimeout(function(){
 
 const connection = mysql.createConnection(dbConfig);
 
@@ -56,4 +56,4 @@ connection.connect((error) => {
   });
 });
 
-}, 10 * 1000);
+// }, 10 * 1000);

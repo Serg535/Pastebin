@@ -1,4 +1,32 @@
-  const block = document.getElementById('block')
+const block = document.getElementById('block')
+document.getElementById('postform-text').addEventListener('keydown', function(e) {
+  if (e.key === 'Tab') {
+        e.preventDefault();
+        const start = this.selectionStart;
+        const end = this.selectionEnd;
+        this.value = this.value.substring(0, start) + '    ' + this.value.substring(end);
+        this.selectionStart = this.selectionEnd = start + 4;}
+})
+
+document.getElementById('postform-text').addEventListener('paste', function(e) {
+    e.preventDefault();
+    
+    const pastedText = (e.clipboardData || window.clipboardData).getData('text');
+    const start = this.selectionStart;
+    const end = this.selectionEnd;
+    
+    // Функция для сохранения отступов
+    function preserveIndentation(text) {
+        return text
+            .replace(/\t/g, '    ') // Табы -> 4 пробела
+            .replace(/^ +/gm, spaces => '&nbsp;'.repeat(spaces.length)) // Пробелы в начале строк
+            .replace(/ {2}/g, ' &nbsp;'); // Двойные пробелы в тексте
+    }
+    
+    const preservedText = preserveIndentation(pastedText);
+    this.value = this.value.substring(0, start) + preservedText + this.value.substring(end);
+    this.selectionStart = this.selectionEnd = start + preservedText.length;
+});
 
 async function readInput(event) {
   event.preventDefault()

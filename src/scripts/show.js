@@ -26,7 +26,7 @@ function displayPaste(paste) {
     <div class="inner_box">
             <h3 class="title">${paste.title}</h3>
             <p class="date">${new Date(paste.StartDate).toLocaleString('ru-RU')} - ${new Date(paste.EndDate).toLocaleString('ru-RU')}</p>
-            <p class="content">${paste.text}</p>
+            <div class="content" style="white-space: pre-wrap;">${paste.text}</div>
         </div>
     `
 }
