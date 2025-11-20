@@ -1,4 +1,7 @@
 const block = document.getElementById('block')
+const login_container = document.querySelector('.login_container')
+const modal_overlay = document.querySelector('.modal_overlay')
+const login_btn = document.querySelector('.login_btn')
 document.getElementById('postform-text').addEventListener('keydown', function(e) {
   if (e.key === 'Tab') {
         e.preventDefault();
@@ -7,26 +10,6 @@ document.getElementById('postform-text').addEventListener('keydown', function(e)
         this.value = this.value.substring(0, start) + '    ' + this.value.substring(end);
         this.selectionStart = this.selectionEnd = start + 4;}
 })
-
-document.getElementById('postform-text').addEventListener('paste', function(e) {
-    e.preventDefault();
-    
-    const pastedText = (e.clipboardData || window.clipboardData).getData('text');
-    const start = this.selectionStart;
-    const end = this.selectionEnd;
-    
-    // Функция для сохранения отступов
-    function preserveIndentation(text) {
-        return text
-            .replace(/\t/g, '    ') // Табы -> 4 пробела
-            .replace(/^ +/gm, spaces => '&nbsp;'.repeat(spaces.length)) // Пробелы в начале строк
-            .replace(/ {2}/g, ' &nbsp;'); // Двойные пробелы в тексте
-    }
-    
-    const preservedText = preserveIndentation(pastedText);
-    this.value = this.value.substring(0, start) + preservedText + this.value.substring(end);
-    this.selectionStart = this.selectionEnd = start + preservedText.length;
-});
 
 async function readInput(event) {
   event.preventDefault()
@@ -68,4 +51,43 @@ async function readInput(event) {
   }
 }
 
+async function loginAdmin(event) {
+  event.preventDefault()
+
+    const input = document.getElementById('passwordInput').value
+    console.log(input)
+
+    try {
+        const response = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            password: input
+        })
+    })
+    const data = await response.json()
+    if (data.success) {
+        console.log('data success')
+        window.location.href='/admin'
+        return
+    }
+    else {
+        console.error('data error', data.error)
+    }
+    }
+    catch (error) {
+        console.error('Ошибка при отправке на сервер', error)
+    }
+}
+document.getElementById('login').addEventListener('click', loginAdmin)
+
 document.getElementById('btn').addEventListener('click', readInput)
+login_btn.addEventListener('click', (event) => {
+  event.preventDefault()
+  login_container.classList.remove('closed')
+  modal_overlay.classList.remove('closed')
+})
+modal_overlay.addEventListener('click', () => {
+  login_container.classList.add('closed')
+  modal_overlay.classList.add('closed')
+})

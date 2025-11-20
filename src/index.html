@@ -13,7 +13,7 @@
             <div class="header">
                 <a href="http://localhost:3000/" class="logo">Pastebin</a>
                 <div class="header_sign">
-                    <a href="/" class="header_sign_btn btn">Log in</a>
+                    <a href="/admin/login" class="header_sign_btn login_btn btn">Log in</a>
                     <a href="/" class="header_sign_btn btn">Sign Up</a>
                 </div>
             </div>
@@ -30,6 +30,15 @@
         </form>
         </div>
     </div>
+    <div class="modal_overlay closed"></div>
+    <div class="login_container closed">
+    <form id="login_form">
+        <label for="passwordInput">Введите пароль</label>
+        <input id="passwordInput" type="text">
+        <button type="submit" id="login" class="btn">Авторизоваться</button>
+    </form>
+    </div>
+
 
     <script src="scripts/script.js"></script>
 </body>

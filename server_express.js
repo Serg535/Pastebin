@@ -1,6 +1,7 @@
 import connection from './database.js';
 import { fileURLToPath } from 'url';
 import path from 'path';
+import crypto from 'crypto';
 import express from 'express';
 
 const __filename = fileURLToPath(import.meta.url)
@@ -11,6 +12,37 @@ const port = 3000
 
 app.use(express.json())
 app.use(express.static('src'))
+
+
+app.get('/admin/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'login.html'));
+});
+
+app.get('/admin', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'admin.html'));
+});
+
+app.post('/api/admin/login', async (req, res) => {
+    try {
+        const { password } = req.body;
+        const isAuthenticated = 
+            password === process.env.ADMIN_PASSWORD;
+
+        if (!isAuthenticated) {
+            return res.status(401).json({ error: 'Неверный логин или пароль' });
+        }
+
+        res.json({ 
+            success: true, 
+            message: 'Успешный вход'
+        });
+        res.sendFile(path.join(__dirname, 'src', 'admin.html'))
+
+    } catch (error) {
+        console.error('Ошибка входа:', error);
+        res.status(500).json({ error: 'Ошибка сервера' });
+    }
+});
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'src', 'index.html'))
@@ -60,7 +92,19 @@ app.get('/api/paste/:url', async (req, res) => {
         res.status(404).json({error: 'Текст не был найден в бд'})
     }
 })
+app.get('/api/admin/getAll', async (req, res) => {
+    try {
+    const sql = `
+    SELECT * FROM pastebin_data ORDER BY id;
+    `
+    const [results] = await connection.promise().query(sql)
 
+    res.json({pastes: results})
+    }
+    catch (error) {
+        res.status(404).json({error: 'Ошибка получения всех текстов'})
+    }
+})
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
